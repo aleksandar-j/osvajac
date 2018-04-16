@@ -1,0 +1,33 @@
+# Eclipse files
+/.settings
+/.classpath
+/.project
+
+# Contains personal data right now
+/Player.java
+
+/Player.class
+/osvajac_main.class
+/player$1.class
+/player$2$1.class
+/player$2$2.class
+/player$2$3.class
+/player$2$4.class
+/player$2.class
+/player$3$1.class
+/player$3$2.class
+/player$3$3.class
+/player$3$4.class
+/player$3.class
+/player$4$1.class
+/player$4.class
+/player$5$1.class
+/player$5$2.class
+/player$5.class
+/player$6.class
+/player$7.class
+/player$8.class
+/player$9$1.class
+/player$9$2.class
+/player$9.class
+/player.class

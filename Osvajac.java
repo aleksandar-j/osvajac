@@ -27,16 +27,14 @@ public class Osvajac
 
         Player players[] = new Player[10];
 
-        JButton load_game = new JButton("Load Game");
+        JButton load_game = new JButton("Učitaj Igru");
         main_panel.add(load_game);
         load_game.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
         {
             // TODO: Load all player data and not just... this...
             for (int i = 0; i < players.length; i++) {
-                if (players[i] == null) {
-                    players[i] = new Player("Player " + i);
-                }
+                players[i] = new Player("Igrač " + i);
             }
                 
             main_frame.dispose();
@@ -44,7 +42,7 @@ public class Osvajac
         }
             });
         
-        JButton save_game = new JButton("Save Game");
+        JButton save_game = new JButton("Sačuvaj Igru");
         main_panel.add(save_game);
         save_game.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
@@ -53,7 +51,7 @@ public class Osvajac
         }
             });
         
-        JButton new_game = new JButton("New Game");
+        JButton new_game = new JButton("Nova Igra");
         main_panel.add(new_game);
         new_game.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)

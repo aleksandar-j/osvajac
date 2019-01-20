@@ -121,7 +121,12 @@ public class Osvajac
     
     private static void play(Player players[], int current_player) 
     {
-        if (players[current_player] == null && current_player != 0) {
+        if (players[current_player] == null) {
+            if (current_player == 0) {
+                // TODO: No players... Maybe throw exception
+                return;
+            }
+            
             play(players, (current_player + 1) % players.length);
         }
         

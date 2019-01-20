@@ -1,4 +1,7 @@
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,7 +50,7 @@ public class Osvajac
         save_game.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
         {
-            // TODO: Save game
+            save(players);
         }
             });
         
@@ -88,6 +91,32 @@ public class Osvajac
                 + "Rudnika imaš " + p.mines + ". Prihod je " + (p.mines*p.mines_profit));
         camp_txtfield.setText("Trenutno imaš " + p.money + "$. "
                 + "Logora imaš " + p.prisoner_camps + ". Aktivno je " + p.prisoner_count + ". Prihod je " + (p.prisoner_count*p.prisoner_camps_profit));
+    }
+    
+    public static void save(Player players[]) 
+    {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("savegame.sav"));
+            
+            for (int i = 0; i < players.length; i++) {
+                writer.write(players[i].player_name + "\n");
+                writer.write(players[i].money + "\n");
+                writer.write(players[i].soldier_count + "\n");
+                writer.write(players[i].tank_count + "\n");
+                writer.write(players[i].soldier_factory + "\n");
+                writer.write(players[i].tank_factory + "\n");
+                writer.write(players[i].mines + "\n");
+                writer.write(players[i].mines_profit + "\n");
+                writer.write(players[i].prisoner_camps + "\n");
+                writer.write(players[i].prisoner_camps_profit + "\n");
+                writer.write(players[i].prisoner_count + "\n");
+                writer.write(players[i].institutes + "\n");
+            }
+            
+            writer.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
     
     private static void play(Player players[], int current_player) 

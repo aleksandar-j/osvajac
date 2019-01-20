@@ -57,7 +57,10 @@ public class Osvajac
             public void actionPerformed(ActionEvent e)
         {
             // TODO: Ask for player names and number of players
-                
+            for (int i = 0; i < players.length; i++) {
+                players[i] = new Player("Igrač " + i);
+            }
+            
             main_frame.dispose();
             play(players, 0);
         }

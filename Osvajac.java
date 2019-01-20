@@ -1,7 +1,11 @@
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,13 +39,13 @@ public class Osvajac
         load_game.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
         {
-            // TODO: Load all player data and not just... this...
-            for (int i = 0; i < players.length; i++) {
-                players[i] = new Player("Igrač " + i);
+            try {
+                load(players);
+                play(players, 0);
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
             }
-                
-            main_frame.dispose();
-            play(players, 0);
         }
             });
         
@@ -50,7 +54,12 @@ public class Osvajac
         save_game.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
         {
-            save(players);
+            try {
+                save(players);
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }
             });
         
@@ -93,30 +102,54 @@ public class Osvajac
                 + "Logora imaš " + p.prisoner_camps + ". Aktivno je " + p.prisoner_count + ". Prihod je " + (p.prisoner_count*p.prisoner_camps_profit));
     }
     
-    public static void save(Player players[]) 
+    public static void load(Player players[]) throws IOException 
     {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("savegame.sav"));
+        BufferedReader reader = new BufferedReader(new FileReader("savegame.sav"));
+        
+        int i = 0;
+        
+        String player_name = reader.readLine();
+        if (player_name != null) {
+            players[i] = new Player(player_name);
             
-            for (int i = 0; i < players.length; i++) {
-                writer.write(players[i].player_name + "\n");
-                writer.write(players[i].money + "\n");
-                writer.write(players[i].soldier_count + "\n");
-                writer.write(players[i].tank_count + "\n");
-                writer.write(players[i].soldier_factory + "\n");
-                writer.write(players[i].tank_factory + "\n");
-                writer.write(players[i].mines + "\n");
-                writer.write(players[i].mines_profit + "\n");
-                writer.write(players[i].prisoner_camps + "\n");
-                writer.write(players[i].prisoner_camps_profit + "\n");
-                writer.write(players[i].prisoner_count + "\n");
-                writer.write(players[i].institutes + "\n");
-            }
+            players[i].money = Integer.parseInt(reader.readLine());
+            players[i].soldier_count = Integer.parseInt(reader.readLine());
+            players[i].tank_count = Integer.parseInt(reader.readLine());
+            players[i].soldier_factory = Integer.parseInt(reader.readLine());
+            players[i].tank_factory = Integer.parseInt(reader.readLine());
+            players[i].mines = Integer.parseInt(reader.readLine());
+            players[i].mines_profit = Integer.parseInt(reader.readLine());
+            players[i].prisoner_camps = Integer.parseInt(reader.readLine());
+            players[i].prisoner_camps_profit = Integer.parseInt(reader.readLine());
+            players[i].prisoner_count = Integer.parseInt(reader.readLine());
+            players[i].institutes = Integer.parseInt(reader.readLine());
             
-            writer.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
+            i++;
         }
+        
+        reader.close();   
+    }
+    
+    public static void save(Player players[]) throws IOException 
+    {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("savegame.sav"));
+        
+        for (int i = 0; i < players.length; i++) {
+            writer.write(players[i].player_name + "\n");
+            writer.write(players[i].money + "\n");
+            writer.write(players[i].soldier_count + "\n");
+            writer.write(players[i].tank_count + "\n");
+            writer.write(players[i].soldier_factory + "\n");
+            writer.write(players[i].tank_factory + "\n");
+            writer.write(players[i].mines + "\n");
+            writer.write(players[i].mines_profit + "\n");
+            writer.write(players[i].prisoner_camps + "\n");
+            writer.write(players[i].prisoner_camps_profit + "\n");
+            writer.write(players[i].prisoner_count + "\n");
+            writer.write(players[i].institutes + "\n");
+        }
+        
+        writer.close();
     }
     
     private static void play(Player players[], int current_player) 

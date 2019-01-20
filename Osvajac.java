@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -56,6 +57,7 @@ public class Osvajac
         {
             try {
                 save(players);
+                JOptionPane.showMessageDialog(null, "Game saved", "Info", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
@@ -107,9 +109,12 @@ public class Osvajac
         BufferedReader reader = new BufferedReader(new FileReader("savegame.sav"));
         
         int i = 0;
-        
-        String player_name = reader.readLine();
-        if (player_name != null) {
+        while (true) {
+            String player_name = reader.readLine();
+            if (player_name == null) {
+                break;
+            }
+            
             players[i] = new Player(player_name);
             
             players[i].money = Integer.parseInt(reader.readLine());

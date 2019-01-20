@@ -16,6 +16,8 @@ import javax.swing.WindowConstants;
 public class Osvajac
 {
 
+    static Player players[] = new Player[10];
+    
     public static void main(String[] args)
     {
         JFrame main_frame = new JFrame("Osvajač");
@@ -27,8 +29,6 @@ public class Osvajac
 
         JPanel main_panel = new JPanel();
         main_frame.add(main_panel);
-
-        Player players[] = new Player[10];
 
         JButton load_game = new JButton("Učitaj Igru");
         main_panel.add(load_game);
